@@ -1,12 +1,13 @@
 #include "ofApp.h"
 #include "photon.h"
 #include <vector>
+#define NUM_PHOTONS 200
 
 //--------------------------------------------------------------
 void ofApp::setup() {
 	ofBackground(230, 230, 250);
 	
-	for (int i = 0; i < 500; i++) {
+	for (int i = 0; i < NUM_PHOTONS; i++) {
 		Photon *p = new Photon();
 		photons.push_back(p);
 	}
@@ -23,7 +24,7 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 	for (int i = 0; i < photons.size(); i++) {
-		photons[i]->Photon::run();
+		photons[i]->Photon::pColor();
 		photons[i]->Photon::run();
 	}
 
