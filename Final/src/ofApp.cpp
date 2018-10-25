@@ -1,7 +1,7 @@
 #include "ofApp.h"
 #include "photon.h"
 #include <vector>
-#define NUM_PHOTONS 200
+#define NUM_PHOTONS 20
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -23,8 +23,8 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	for (int i = 0; i < photons.size(); i++) {
-		photons[i]->Photon::pColor();
+	for (int i = 0; i < NUM_PHOTONS; i++) {
+		photons[i]->Photon::pColor(i);
 		photons[i]->Photon::run();
 	}
 

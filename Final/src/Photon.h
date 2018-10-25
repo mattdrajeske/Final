@@ -12,7 +12,7 @@ public:
 	void show();
 	void run();
 	void update();
-	void pColor();
+	void pColor(int);
 
 private:
 	float x; //random starting location

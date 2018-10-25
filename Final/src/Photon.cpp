@@ -7,14 +7,14 @@ Photon::Photon() {
 	x = ofGetWindowWidth() + 50; //random starting location
 					   //    x  = ofRandom(ofGetWidth()); //random starting location
 	y = ofRandom(ofGetWindowHeight() - 30, 30); //random y location and start off screen
-	z = ofRandom(5, 20); ///pseudo parallax
+	z = ofRandom(0, 20); ///pseudo parallax
 	len = ofMap(z, PHOTON_LENGTH, 0, PHOTON_LENGTH, 10); //different rain drop length
 	xspeed = ofMap(z, PHOTON_LENGTH, 0, PHOTON_LENGTH, 1);
 }
 
 void Photon::fall() {
 	float grav = ofMap(z, 0, 20, 0, 0.2); //to make the movement more natural
-	xspeed = (grav + xspeed)*1.1;// *0.75;
+	xspeed = (grav + xspeed)*0.9;// *0.75;
 	x -= xspeed;
 	
 	
@@ -28,7 +28,7 @@ void Photon::fall() {
 	if (x < 200) {
 		x = ofGetWindowWidth() + 50;
 		y = ofRandom(ofGetWindowHeight() - 30, 30);
-		z = ofRandom(5, 20);
+		z = ofRandom(10, 20);
 		ofMap(z, 100, 0, 100, 10);
 		xspeed = ofMap(z, 20, 0, 10, 4);
 	}
@@ -47,9 +47,29 @@ void Photon::run()
 	show();
 }
 
-void Photon::pColor() {
-	r = 138;
-	g = 43;
-	b = 226;
+void Photon::pColor(int i) {
+	
+	switch (i) {
+	case 0:
+		r = 255;
+		g = 0;
+		b = 0;
+		break;
+	case 1:
+		r = 0;
+		g = 255;
+		b = 0;
+		break;
+	case 2:
+		r = 0;
+		g = 0;
+		b = 255;
+		break;
+	case 3:
+		r = 255;
+		g = 244;
+		b = 79;
+		break;
+	}
 	ofSetColor(r, g, b);
 }
