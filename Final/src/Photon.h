@@ -20,6 +20,7 @@ private:
 	float z; ///pseudo parallax
 	float len; //different rain drop length
 	float xspeed;
+	float height;
 	int r;
 	int g;
 	int b;
