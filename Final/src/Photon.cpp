@@ -7,69 +7,63 @@ Photon::Photon() {
 	x = ofGetWindowWidth() + 50; //random starting location
 					   //    x  = ofRandom(ofGetWidth()); //random starting location
 	y = ofRandom(ofGetWindowHeight() - 30, 30); //random y location and start off screen
-	z = ofRandom(0, 20); ///pseudo parallax
-	len = ofMap(z, PHOTON_LENGTH, 0, PHOTON_LENGTH, 10); //different rain drop length
+	z = ofRandom(2, 30); ///pseudo parallax
 	xspeed = ofMap(z, PHOTON_LENGTH, 0, PHOTON_LENGTH, 1);
+	len = ofMap(xspeed, PHOTON_LENGTH, 0, PHOTON_LENGTH, 10); //different rain drop length
 }
 
 void Photon::fall() {
+
 	float grav = ofMap(z, 0, 20, 0, 0.2); //to make the movement more natural
-	xspeed = (grav + xspeed)*0.9;// *0.75;
+	xspeed = (grav + xspeed)/1;
 	x -= xspeed;
-	
-	
+	len += xspeed/len;
 
-	//so the drops reset to the top
-	//    if (y > ofGetHeight()) {
-	//        y = ofRandom(-200, -100);
-	//        xspeed = ofMap(z, 0, 20, 4, 10);
-	//    }
-
-	if (x < 200) {
+	if (x <= -200) {
 		x = ofGetWindowWidth() + 50;
 		y = ofRandom(ofGetWindowHeight() - 30, 30);
-		z = ofRandom(10, 20);
-		ofMap(z, 100, 0, 100, 10);
-		xspeed = ofMap(z, 20, 0, 10, 4);
+		z = ofRandom(2, 30);
+		len = ofMap(z, PHOTON_LENGTH, 0, PHOTON_LENGTH, 10);
+		xspeed = ofMap(z, PHOTON_LENGTH, 0, PHOTON_LENGTH, 1);
 	}
+	show();
 }
 
 void Photon::show() {
-	float thick = ofMap(z, 0, 20, 3, 1);
+	float thick = ofMap(z, 0, 10, 3, 1);
 	ofSetLineWidth(thick);
-	//ofSetColor(138, 43, 226);
 	ofDrawLine(x, y, x - len, y);
 }
 
 void Photon::run()
 {
 	fall();
-	show();
 }
 
 void Photon::pColor(int i) {
 	
-	switch (i) {
-	case 0:
+	if(i % 4 == 0) {
 		r = 255;
 		g = 0;
 		b = 0;
-		break;
-	case 1:
+	}else if(i % 3 == 0){
 		r = 0;
 		g = 255;
 		b = 0;
-		break;
-	case 2:
+	}else if(i % 2 == 0) {
 		r = 0;
 		g = 0;
-		b = 255;
-		break;
-	case 3:
-		r = 255;
-		g = 244;
-		b = 79;
-		break;
+		b = 255;	
 	}
+	else {
+		r = 255;
+		g = 0;
+		b = 255;
+	}
+	
+	/*r = ofRandom(255);
+	g = ofRandom(255);
+	b = ofRandom(255);*/
+
 	ofSetColor(r, g, b);
 }
