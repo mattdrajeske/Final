@@ -11,6 +11,7 @@ Photon::Photon() {
 					   //    x  = ofRandom(ofGetWidth()); //random starting location
 	y = ofRandom(ofGetWindowHeight() - 30, 30); //random y location and start off screen
 	z =      ofRandom(z_lower, z_upper); ///pseudo parallax
+	a = ofMap(z, 2, 30, 50, 100);
 	xspeed = ofMap(z, z_lower, z_upper, 1, 2);
 	len =    ofMap(z, z_lower, z_upper, 10, PHOTON_LENGTH); //different rain drop length
 	height = ofMap(z, z_lower, z_upper, 0.1, 5);
@@ -35,12 +36,13 @@ void Photon::fall() {
 }
 
 void Photon::show() {
-	ofPoint p;
+	/*ofPoint p;
 	p.x = x;
-	p.y = y;
-
+	p.y = y;*/
+	
 	ofSetLineWidth(5);
-	ofDrawRectangle(p, len, height);
+	ofRectangle rect(x, y, len, height);
+	ofDrawRectangle(rect);
 }
 
 void Photon::run()
@@ -69,13 +71,10 @@ void Photon::pColor(int i) {
 		g = 0;
 		b = 255;
 	}
-
-	int a = ofMap(z, 2, 30, 50, 100);
 	
 	/*r = ofRandom(255);
 	g = ofRandom(255);
 	b = ofRandom(255);*/
-
 	
 	ofSetColor(r, g, b, a);
 }
