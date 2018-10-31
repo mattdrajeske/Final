@@ -18,7 +18,7 @@ private:
 	float x; //random starting location
 	float y; //random y location and start off screen
 	float z; ///pseudo parallax
-	float len; //different rain drop length
+	//float len; //different rain drop length
 	float xspeed;
 	float height;
 	int r;

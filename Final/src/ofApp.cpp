@@ -5,15 +5,18 @@
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	ofBackground(230, 230, 250);
+	//ofBackground(230, 230, 250);
 	
 	for (int i = 0; i < NUM_PHOTONS; i++) {
 		Photon *p = new Photon();
 		photons.push_back(p);
 
 	}
-
+	
+	//ofSetBackgroundAuto(false);
 	ofBackground(0, 0, 0);
+	//ofEnableAlphaBlending();
+	ofSetFrameRate(144);
 
 }
 
