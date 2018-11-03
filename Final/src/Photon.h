@@ -13,6 +13,7 @@ public:
 	void run();
 	void update();
 	void pColor(int);
+	void PhotonDraw();
 
 private:
 	float x; //random starting location
@@ -25,6 +26,7 @@ private:
 	int g;
 	int b;
 	int a;
+	
 
 };
 

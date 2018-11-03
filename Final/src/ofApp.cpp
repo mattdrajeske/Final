@@ -6,6 +6,8 @@
 //--------------------------------------------------------------
 void ofApp::setup() {
 	//ofBackground(230, 230, 250);
+	ofSetBackgroundAuto(false);
+	ofEnableAlphaBlending();
 	
 	for (int i = 0; i < NUM_PHOTONS; i++) {
 		Photon *p = new Photon();
@@ -15,23 +17,30 @@ void ofApp::setup() {
 	
 	//ofSetBackgroundAuto(false);
 	ofBackground(0, 0, 0);
-	//ofEnableAlphaBlending();
+	ofEnableAlphaBlending();
 	ofSetFrameRate(144);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	
+	//for (int i = 0; i < NUM_PHOTONS; i++) {
+		
+	//}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+	ofSetColor(0, 0, 0, 20);
+	ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+
 	for (int i = 0; i < NUM_PHOTONS; i++) {
 		photons[i]->Photon::pColor(i+1);
 		photons[i]->Photon::run();
+		photons[i]->Photon::PhotonDraw();
 	}
 
+	ofDisableAlphaBlending();
 	elec.eColor();
 	elec.Electron::run();
 

@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include "Photon.h"
 #define PHOTON_LENGTH 100
-#define SLOWDOWN 1.0
-#define z_upper 90
-#define z_lower 5
+#define SLOWDOWN 0.7
+#define z_upper 30
+#define z_lower 2
+#define trail_length 1
 
 Photon::Photon() {
 	//fields
@@ -11,10 +12,19 @@ Photon::Photon() {
 					   //    x  = ofRandom(ofGetWidth()); //random starting location
 	y = ofRandom(ofGetWindowHeight() - 30, 30); //random y location and start off screen
 	z =      ofRandom(z_lower, z_upper); ///pseudo parallax
-	a = ofMap(z, z_lower, z_upper, 50, 100);
+	a = ofMap(z, z_lower, z_upper, 0, 100);
 	xspeed = ofMap(z, z_lower, z_upper, 1, 2);
-	//len =    ofMap(z, z_lower, z_upper, 10, PHOTON_LENGTH); //different rain drop length
 	height = ofMap(z, z_lower, z_upper, 3, 15);
+	ofRectangle trail[trail_length];
+	
+	//trail that will follow each photon
+	//for (int i = 0; i < trail_length; i++) {
+	//	trail[i].getX = x - i;
+	//	trail[i].getY = y;
+	//	trail[i].getWidth = height;
+	//	trail[i].getHeight = height;
+
+	//}
 }
 
 void Photon::fall() {
@@ -28,17 +38,12 @@ void Photon::fall() {
 		x = ofGetWindowWidth() + 50;
 		y = ofRandom(ofGetWindowHeight() - 30, 30);
 		z =      ofRandom(z_lower, z_upper);
-		//len =    ofMap(z, z_lower, z_upper, 10, PHOTON_LENGTH);
 		xspeed = ofMap(z, z_lower, z_upper, 1, 2);
 		height = ofMap(z, z_lower, z_upper, 3, 15);
 	}
-	//show();
 }
 
 void Photon::show() {
-	/*ofPoint p;
-	p.x = x;
-	p.y = y;*/
 	
 	ofSetLineWidth(5);
 	ofRectangle rect(x, y, height, height);
@@ -77,4 +82,35 @@ void Photon::pColor(int i) {
 	b = ofRandom(255);*/
 	
 	ofSetColor(r, g, b, a);
+	//ofDisableAlphaBlending();
+}
+
+void Photon::PhotonDraw() {
+
+	
+	/*int count = 0;
+	int tempAlpha = a;
+	ofRectangle trail[trail_length];
+
+	for (int i = 0; i < trail_length; i++) {		
+		ofSetColor(r, g, b, tempAlpha);		
+
+		while (tempAlpha > 0) {
+			tempAlpha--;
+			if (tempAlpha == 1 && count <= 1000) {
+				count++;
+				tempAlpha = a;
+			}
+		}
+
+		trail[i].setX(x - (i*100));
+		trail[i].setY(y);
+		trail[i].setWidth(height);
+		trail[i].setHeight(height);
+		
+
+		ofDrawRectangle(trail[i]);
+	}*/
+	
+
 }
