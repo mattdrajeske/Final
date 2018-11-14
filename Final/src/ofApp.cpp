@@ -17,8 +17,6 @@ void ofApp::setup() {
 	
 	//ofSetBackgroundAuto(false);
 	ofBackground(0, 0, 0);
-	ofEnableAlphaBlending();
-	ofSetFrameRate(144);
 
 }
 
@@ -40,7 +38,6 @@ void ofApp::draw() {
 		photons[i]->Photon::PhotonDraw();
 	}
 
-	ofDisableAlphaBlending();
 	elec.eColor();
 	elec.Electron::run();
 
