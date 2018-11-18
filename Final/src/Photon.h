@@ -14,6 +14,8 @@ public:
 	void update();
 	void pColor(int);
 	void PhotonDraw();
+	float GetX();
+	float GetY();
 
 private:
 	float x; //random starting location

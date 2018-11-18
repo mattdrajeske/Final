@@ -114,3 +114,11 @@ void Photon::PhotonDraw() {
 	
 
 }
+
+float Photon::GetX() {
+	return x;
+}
+
+float Photon::Gety() {
+	return y;
+}

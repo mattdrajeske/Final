@@ -1,18 +1,28 @@
 #include "ofApp.h"
 #include "photon.h"
+#include "Qtree.h"
 #include <vector>
 #define NUM_PHOTONS 200
+
+//vector<ofPoint> points;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
 	//ofBackground(230, 230, 250);
 	ofSetBackgroundAuto(false);
 	ofEnableAlphaBlending();
+
+	ofRectangle boundary(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
+	QuadTree qt(boundary, 4);
+	ofPoint photonPosition;
 	
 	for (int i = 0; i < NUM_PHOTONS; i++) {
 		Photon *p = new Photon();
+		photonPosition.x = p->x;
 		photons.push_back(p);
+		
 
+		
 	}
 	
 	ofBackground(0, 0, 0);
