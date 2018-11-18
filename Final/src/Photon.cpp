@@ -119,6 +119,6 @@ float Photon::GetX() {
 	return x;
 }
 
-float Photon::Gety() {
+float Photon::GetY() {
 	return y;
 }

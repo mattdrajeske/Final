@@ -33,16 +33,18 @@
 class QuadTree {
 public:
 	QuadTree(ofRectangle, float);
-
+	QuadTree();
+	QuadTree(QuadTree *);
 	void subdivide();
-	void insert();
+	void insert(ofPoint);
 	void query();
-	vector<ofPoint> points;
+	
 
 private:
+	vector<ofPoint> points;
 	ofRectangle boundary;
 	float capacity;	
-	bool divided;
+	bool divided = false;
 
 };
 

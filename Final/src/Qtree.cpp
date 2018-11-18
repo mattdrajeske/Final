@@ -1,68 +1,64 @@
 #include <stdio.h>
+#include <vector>
 #include "Qtree.h"
 
-//Point::Point() {
-//
-//}
-//
-//Rectangle::Rectangle() {
-//	x;
-//	y;
-//	w;
-//	h;
-//}
-//
-//void Rectangle::contains(float point) {
-//	return (point.x >= x - w && point.x <= x + w && point.y >= y - h && point.y <= y + h)
-//
-//}
-//
-//void Rectangle::intersects(int range) {
-//	return (range.x - range.w > x + w || range.x + range.w < x - w || range.y - range.h > y + h || range.y + range.h < y - h);
-//}
+
 
 QuadTree::QuadTree(ofRectangle bound, float cap) {
 	bound = boundary;
 	cap = capacity;
 }
 
+QuadTree::QuadTree() {
+	boundary = ofRectangle(0, 0, 0, 0);
+	capacity = 0;
+}
+
+QuadTree::QuadTree(QuadTree * qt) {
+	boundary = qt->boundary;
+	capacity = qt->capacity;
+}
+
+QuadTree * northeast;
+QuadTree * northwest;
+QuadTree * southeast;
+QuadTree * southwest;
+
 void QuadTree::subdivide() {
-	int x = boundary.x;
-	int y = boundary.y;
-	int w = boundary.w / 2;
-	int h = boundary.h / 2;
+	float x = boundary.x; 
+	float y = boundary.y;
+	
+	ofRectangle ne(x + boundary.width / 2, y - boundary.height / 2, boundary.width/2, boundary.height/2); //make quadrants of the quad tree
+	northeast = new QuadTree(ne, 4);
+	QuadTree qtne(northeast);
 
-	float ne = new Rectangle(x + w, y - h, w, h);
-	northeast = new QuadTree(ne, capacity);
+	ofRectangle nw(x - boundary.width / 2, y - boundary.height / 2, boundary.width / 2, boundary.height / 2);
+	northwest= new QuadTree(nw, 4);
+	QuadTree qtne(northwest);
 
-	float nw = new Rectangle(x - w, y - h, w, h);
-	northwest = new QuadTree(nw, capacity);
+	ofRectangle se(x + boundary.width / 2, y + boundary.height / 2, boundary.width / 2, boundary.height / 2);
+	southeast = new QuadTree(se, 4);
+	QuadTree qtse(southeast);
 
-	float se = new Rectangle(x + w, y + h, w, h);
-	southeast = new QuadTree(se, capacity);
+	ofRectangle sw(x - boundary.width / 2, y + boundary.height / 2, boundary.width / 2, boundary.height / 2);
+	southwest = new QuadTree(sw, 4);
+	QuadTree qtsw(southwest);
 
-	float sw = new Rectangle(x - w, y + h, w, h);
-	southwest = new QuadTree(sw, capacity);
-
-	divided = true;
 }
 
 
-void QuadTree::insert(float point) {
-	if (!boundary.contains(point)) {
-		return false;
-	}
+void QuadTree::insert(ofPoint point) {
 
-	if (points.length() < capacity) {
-		points.push(point);
-		return true;
+	if (points.size() < capacity) { //if the quadrant is over capacity, subdivide it
+		points.push_back(point);
 	}
+	else {
+		if (!divided) { //flag to tell if quadtree has been divided
+			subdivide();
+			divided = true;
+		}
 
-	if (!this.divided) {
-		subdivide();
 	}
-
-	return (northeast.insert(point) || northwest.insert(point) || southeast.insert(point) || southwest.insert(point));
 }
 
 void QuadTree::query(range, found) {

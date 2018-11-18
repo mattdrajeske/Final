@@ -34,6 +34,5 @@ void Electron::eColor() {
 	r = 255; 
 	g = 255;
 	b = 255;
-	//ofEnableAlphaBlending();
 	ofSetColor(r, g, b);
 }
