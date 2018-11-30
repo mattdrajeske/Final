@@ -34,10 +34,16 @@ class QuadTree {
 public:
 	QuadTree(ofRectangle, float);
 	QuadTree();
-	QuadTree(QuadTree *);
+	//QuadTree(QuadTree *);
 	void subdivide();
 	void insert(ofPoint);
 	void query();
+	void changeBoundary(ofRectangle);
+	bool contains(ofPoint);
+	QuadTree * northeast;
+	QuadTree * northwest;
+	QuadTree * southeast;
+	QuadTree * southwest;
 	
 
 private:

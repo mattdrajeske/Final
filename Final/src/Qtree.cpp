@@ -11,43 +11,48 @@ QuadTree::QuadTree(ofRectangle bound, float cap) {
 
 QuadTree::QuadTree() {
 	boundary = ofRectangle(0, 0, 0, 0);
-	capacity = 0;
+	capacity = 2;
 }
 
-QuadTree::QuadTree(QuadTree * qt) {
-	boundary = qt->boundary;
-	capacity = qt->capacity;
+bool QuadTree::contains(ofPoint point) {
+	return(point.x > boundary.x - boundary.width &&
+		point.x < boundary.x + boundary.width &&
+		point.y > boundary.y - boundary.height &&
+		point.y < boundary.y + boundary.height);
 }
 
-QuadTree * northeast;
-QuadTree * northwest;
-QuadTree * southeast;
-QuadTree * southwest;
+
+void QuadTree::changeBoundary(ofRectangle newBound) {
+	boundary.width = newBound.width; //changes boundary of quad tree
+	boundary.height = newBound.height;
+	boundary.x = newBound.x;
+	boundary.y = newBound.y;
+}
 
 void QuadTree::subdivide() {
 	float x = boundary.x; 
 	float y = boundary.y;
 	
-	ofRectangle ne(x + boundary.width / 2, y - boundary.height / 2, boundary.width/2, boundary.height/2); //make quadrants of the quad tree
-	northeast = new QuadTree(ne, 4);
-	QuadTree qtne(northeast);
+	
+	ofRectangle ne(x + boundary.width / 2, y - boundary.height / 2, boundary.width/2, boundary.height/2); //make quadrants of the quad tree	
+	northeast->changeBoundary(ne);
 
-	ofRectangle nw(x - boundary.width / 2, y - boundary.height / 2, boundary.width / 2, boundary.height / 2);
-	northwest= new QuadTree(nw, 4);
-	QuadTree qtne(northwest);
+	ofRectangle nw(x - boundary.width / 2, y - boundary.height / 2, boundary.width / 2, boundary.height / 2);	
+	northwest->changeBoundary(nw);
 
 	ofRectangle se(x + boundary.width / 2, y + boundary.height / 2, boundary.width / 2, boundary.height / 2);
-	southeast = new QuadTree(se, 4);
-	QuadTree qtse(southeast);
+	southeast->changeBoundary(se);
 
 	ofRectangle sw(x - boundary.width / 2, y + boundary.height / 2, boundary.width / 2, boundary.height / 2);
-	southwest = new QuadTree(sw, 4);
-	QuadTree qtsw(southwest);
-
+	southwest->changeBoundary(sw);
+	divided = true;
 }
 
 
 void QuadTree::insert(ofPoint point) {
+	if (!contains(point)) {
+		return;
+	}
 
 	if (points.size() < capacity) { //if the quadrant is over capacity, subdivide it
 		points.push_back(point);
@@ -55,9 +60,11 @@ void QuadTree::insert(ofPoint point) {
 	else {
 		if (!divided) { //flag to tell if quadtree has been divided
 			subdivide();
-			divided = true;
 		}
-
+		northeast->insert(point);
+		northwest->insert(point);
+		southeast->insert(point);
+		southeast->insert(point);
 	}
 }
 
