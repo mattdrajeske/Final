@@ -68,26 +68,26 @@ void QuadTree::insert(ofPoint point) {
 	}
 }
 
-void QuadTree::query(range, found) {
-	if (!found) {
-		found = [];
-	}
-
-	if (!range.intersects(boundary)) {
-		return found;
-	}
-
-	for (let p of points) {
-		if (range.contains(p)) {
-			found.push(p);
-		}
-	}
-	if (divided) {
-		northwest.query(range, found);
-		northeast.query(range, found);
-		southwest.query(range, found);
-		southeast.query(range, found);
-	}
-
-	return found;
-}
+//void QuadTree::query(range, found) {
+//	if (!found) {
+//		found = [];
+//	}
+//
+//	if (!range.intersects(boundary)) {
+//		return found;
+//	}
+//
+//	for (let p of points) {
+//		if (range.contains(p)) {
+//			found.push(p);
+//		}
+//	}
+//	if (divided) {
+//		northwest.query(range, found);
+//		northeast.query(range, found);
+//		southwest.query(range, found);
+//		southeast.query(range, found);
+//	}
+//
+//	return found;
+//}

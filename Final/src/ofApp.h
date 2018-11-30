@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Electron.h"
 #include "Photon.h"
+#include "QTree.h"
 #include <vector>
 
 class ofApp : public ofBaseApp {
@@ -24,6 +25,9 @@ public:
 	void gotMessage(ofMessage msg);
 	vector<Photon*>photons; //new vector
 	Electron elec;
+	ofRectangle boundary; //boundary for quad tree that handles collision detection
+	QuadTree * qt; //quad tree, 4 is the capacity that causes it to divide
+
 
 
 

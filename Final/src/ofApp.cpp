@@ -5,15 +5,19 @@
 #define NUM_PHOTONS 200
 
 //vector<ofPoint> points;
-ofRectangle boundary(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, ofGetWindowWidth() / 2, ofGetWindowHeight() / 2); //boundary for quad tree that handles collision detection
-QuadTree qt(boundary, 4); //quad tree, 4 is the capacity that causes it to divide
-
 //--------------------------------------------------------------
 void ofApp::setup() {
 	//ofBackground(230, 230, 250);
 	ofSetBackgroundAuto(false);
 	ofEnableAlphaBlending();
 
+	boundary.width = ofGetWindowWidth() / 2;
+	boundary.height = ofGetWindowHeight() / 2;
+	boundary.x = ofGetWindowWidth() / 2;
+	boundary.y= ofGetWindowHeight() / 2;
+	QuadTree quad(boundary, 2);
+	qt = &quad;
+	
 	
 	ofPoint photonPosition; //point that each of the photons are at
 	
@@ -22,7 +26,7 @@ void ofApp::setup() {
 		photonPosition.x = p->GetX();//sets x for each point handled by the quad tree
 		photonPosition.y = p->GetY();//sets y for each point handled by the quad tree
 		photons.push_back(p);
-		qt.insert(photonPosition);//adds points to a vector that is a member data of the quad tree class		
+		qt->insert(photonPosition);//adds points to a vector that is a member data of the quad tree class
 	}
 	
 	ofBackground(0, 0, 0);
@@ -44,9 +48,7 @@ void ofApp::draw() {
 	for (int i = 0; i < NUM_PHOTONS; i++) {
 		photons[i]->Photon::pColor(i+1);
 		photons[i]->Photon::run();
-		photons[i]->Photon::PhotonDraw();
-		//qt.points[i].x = photons[i]->GetX();//updates the points in the points vector of quad tree class
-		//qt.points[i].y = photons[i]->GetY();
+		photons[i]->Photon::PhotonDraw();	
 	}
 
 	elec.eColor();
