@@ -27,7 +27,7 @@ public:
 	Electron elec;
 	ofRectangle boundary; //boundary for quad tree that handles collision detection
 	QuadTree * qt; //quad tree, 4 is the capacity that causes it to divide
-
+	ofPoint photonPosition; //point that each of the photons are at
 
 
 

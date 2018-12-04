@@ -40,7 +40,7 @@ public:
 	void query();
 	void changeBoundary(ofRectangle);
 	bool contains(ofPoint);
-	QuadTree * northeast;
+	QuadTree * northeast; //sections of quadtree
 	QuadTree * northwest;
 	QuadTree * southeast;
 	QuadTree * southwest;

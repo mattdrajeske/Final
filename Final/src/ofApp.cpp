@@ -17,16 +17,13 @@ void ofApp::setup() {
 	boundary.y= ofGetWindowHeight() / 2;
 	QuadTree quad(boundary, 2);
 	qt = &quad;
-	
-	
-	ofPoint photonPosition; //point that each of the photons are at
-	
 	for (int i = 0; i < NUM_PHOTONS; i++) {
 		Photon *p = new Photon();
 		photonPosition.x = p->GetX();//sets x for each point handled by the quad tree
 		photonPosition.y = p->GetY();//sets y for each point handled by the quad tree
 		photons.push_back(p);
 		qt->insert(photonPosition);//adds points to a vector that is a member data of the quad tree class
+		
 	}
 	
 	ofBackground(0, 0, 0);
@@ -48,7 +45,8 @@ void ofApp::draw() {
 	for (int i = 0; i < NUM_PHOTONS; i++) {
 		photons[i]->Photon::pColor(i+1);
 		photons[i]->Photon::run();
-		photons[i]->Photon::PhotonDraw();	
+		photons[i]->Photon::PhotonDraw();
+		
 	}
 
 	elec.eColor();

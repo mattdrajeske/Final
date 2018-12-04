@@ -33,7 +33,6 @@ void QuadTree::subdivide() {
 	float x = boundary.x; 
 	float y = boundary.y;
 	
-	
 	ofRectangle ne(x + boundary.width / 2, y - boundary.height / 2, boundary.width/2, boundary.height/2); //make quadrants of the quad tree	
 	northeast->changeBoundary(ne);
 

@@ -13,6 +13,8 @@ public:
 	void run();
 	void update();
 	void eColor();
+	float getX();
+	float getY();
 
 private:
 	float x; //x location

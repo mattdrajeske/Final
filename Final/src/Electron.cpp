@@ -36,3 +36,11 @@ void Electron::eColor() {
 	b = 255;
 	ofSetColor(r, g, b);
 }
+
+float Electron::getX() {
+	return x;
+}
+
+float Electron::getY() {
+	return y;
+}
